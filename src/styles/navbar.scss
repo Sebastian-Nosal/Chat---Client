@@ -1,0 +1,82 @@
+@import './variables.scss';
+@import './functions.scss';
+
+.menu
+{
+   box-sizing: border-box;
+   padding-left: 12px;
+   padding-right: 12px;
+   background-color: $nav-background-color;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   font-size: 18px;
+   font-weight: bold;
+   box-shadow: 1px 0px 5px 2px black;
+
+    header
+    {
+        @include center();
+        width: 1000px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &_logo
+    {
+        display: flex;
+        align-items: center;
+        max-height: 100%;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        img
+        {
+            width: 2.6rem;
+            height: 2.6rem;
+        }
+    }
+
+    &-timer
+    {
+        font-size: 28px;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    &-account
+    {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-weight: 500;
+
+        &_status
+        {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+            &_diode
+            {
+                margin-right: 8px;
+                background-color: $nav-background-color;
+                width: 10px;
+                height: 10px;
+                border-radius: 10px;
+                box-sizing: border-box;
+                border: 3px solid $diode-color;
+
+                &_OK
+                {
+                    border-color: $diode-OK;
+                }
+
+                &_ERR
+                {
+                    border-color: $diode-Error;
+                }
+
+                &_WAITING
+                {
+                    border-color: $diode-Waiting;
+                }
+            }
+        }
+    }
+}

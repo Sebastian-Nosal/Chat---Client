@@ -1,5 +1,6 @@
 import "../styles/navbar.scss";
-import logo from '../logo.png'
+import logo from '../logo.png';
+import Timer from '../features/timer';
 
 function Navbar()
 {
@@ -11,7 +12,7 @@ function Navbar()
                     <img src={logo} alt="Logo" />
                 </div>
                 <div className="menu-timer">
-                    <span className="menu-timer_timer"> 12:00:00</span>
+                    <Timer/>
                 </div>
                 <div className="menu-account">
                     <div className="menu-account_status">

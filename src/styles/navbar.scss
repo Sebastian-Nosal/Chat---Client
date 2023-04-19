@@ -3,20 +3,23 @@
 
 .menu
 {
-   box-sizing: border-box;
-   padding-left: 12px;
-   padding-right: 12px;
-   background-color: $nav-background-color;
-   padding-top: 10px;
-   padding-bottom: 10px;
-   font-size: 18px;
-   font-weight: bold;
-   box-shadow: 1px 0px 5px 2px black;
+    position: sticky;
+    box-sizing: border-box;
+    padding-left: 12px;
+    padding-right: 12px;
+    background-color: $nav-background-color;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 1px 0px 5px 2px black;
+    margin-bottom: 30px;
 
     header
     {
         @include center();
-        width: 1000px;
+        max-width: 1000px;
+        width: calc(100vw - 20px);
         display: flex;
         justify-content: space-between;
         align-items: center;

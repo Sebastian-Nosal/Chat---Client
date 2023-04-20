@@ -1,7 +1,13 @@
 import React from "react";
 import RegisterForm from '../presentations/RegisterForm';
 
-function RegisterContainer()
+interface RegisterContainerInterface
+{
+    switchToLogin:Function;
+    switchToChat:Function;
+}
+
+function RegisterContainer(props:RegisterContainerInterface)
 {
     return(<RegisterForm/>)
 }

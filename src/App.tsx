@@ -2,26 +2,43 @@ import React from 'react';
 import NavBar from './presentations/Navbar';
 import { Provider } from 'react-redux';
 import store from './store/store';
-import LoginForm from './presentations/LoginForm';
 import './styles/main.scss';
 import LoginContainer from './containers/loginContainer'
+import {useState} from 'react';
+import RegisterContainer from './containers/registerContainer';
 
-function App() {
+/*
+    mode 0 -> Login
+    mode 1 -> Register
+    mode 2 -> Chat
+*/
+
+function App() 
+{
+  const [mode,setMode] = useState(0);
+ 
+  function switchMode()
+  {
+    switch(mode)
+    {
+      case 0:
+        return (<LoginContainer switchToRegister={()=>setMode(1)} switchToChat={()=>setMode(2)}/>)
+        break;
+      case 1:
+        return (<RegisterContainer switchToLogin={()=>setMode(0)} switchToChat={()=>setMode(2)}/>)
+        break;
+      case 2:
+        return (<></>)
+        break;
+    }
+  }
+
   return (
     <Provider store={store}>
       <NavBar/>
-      <LoginContainer/>
+      {switchMode()}
     </Provider>
   );
 }
-
-/*<LoginForm 
-        passwordStrength={30} 
-        passwordComment='' 
-        passwordConfig={null} 
-        usernameConfig={null} 
-        onSubmit={()=>{}} 
-        passwordHandler={()=>{}}  />
-*/
 
 export default App;

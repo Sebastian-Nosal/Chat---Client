@@ -47,7 +47,8 @@ function LoginForm(props:LoginFormProps)
                     {
                         props.passwordComment!=='' ? 
                         (<ul className="from-container_comment">
-                            {props.passwordComment.split('\n').map(el=>(<li>{el}</li>))}
+                            <p>Hasło powinno: </p>
+                            {props.passwordComment.split('\n').map((el,idx)=>(<li key={idx}>{el}</li>))}
                         </ul>):(<></>)
                     }
                 </label>

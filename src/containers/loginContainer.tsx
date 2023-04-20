@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import LoginForm from "../presentations/LoginForm";
 import axios from "axios";
 import { authURL } from "../config";
-import { Exception } from "sass";
+import { useDispatch } from "react-redux";
+import { addToken } from "../store/reducers";
 
 const usernamePattern = /^(?!.*[{}\/;':"!@#$%^&*()_+]).{8,32}$/;
 const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&;:<>/\?]).{8,32}$/;
@@ -14,11 +15,18 @@ interface loginFormInterface
     password:string;
 }
 
-export default function LoginContainer()
+interface LoginContainerProps
+{
+    switchToRegister:Function
+    switchToChat:Function
+}
+
+export default function LoginContainer(props:LoginContainerProps)
 {
     const [passwordStrength,setPasswordStrength] = useState(0);
     const [passwordComment,setPasswordComment] = useState('');
     const {register, handleSubmit} = useForm();
+    const dispatch = useDispatch();
 
     async function onSubmit(data:any)
     {
@@ -29,11 +37,13 @@ export default function LoginContainer()
                 username: data.username,
                 password:data.password,
                 })
-            console.log(result);
+            console.log('*');
+            dispatch(addToken(result.data))
+            props.switchToChat();
         }
         catch(err:any)
         {
-            console.log(err.data)
+            console.log(`Error ${err.data}`)
         }
     }
 

@@ -5,9 +5,9 @@ import {messagesReducer, groupsReducer, usersReducer, tokenReducer} from './redu
 export interface stateInterface
 {
     token:string,
-    users:Array<string>,
-    messages:Array<string>,
-    groups:Array<string>
+    users:Array<object>,
+    messages:Array<object>,
+    groups:Array<object>
 }
 
 export const initialState:stateInterface = {
@@ -21,7 +21,7 @@ const store = configureStore(
     {
         reducer:{
             messages: messagesReducer,
-            group: groupsReducer,
+            groups: groupsReducer,
             users: usersReducer,
             token:tokenReducer
         }

@@ -1,6 +1,7 @@
 import "../styles/navbar.scss";
 import logo from '../logo.png';
 import Timer from '../features/timer';
+import { useSelector } from "react-redux";
 
 function Navbar()
 {

@@ -1,20 +1,21 @@
 export type action = {
     type: string,
-    value?:string|number|object
+    value?:string|number|object|[]
 }
 
 export const addToken = (token:string)=>({type:"ADD_TOKEN",value:token});
 export const dropToken = ()=>({type:"DROP_TOKEN"});
 
-export const addGroup = (group:object) => ({type: "ADD_GROUP",value: JSON.stringify(group)});
+export const addGroup = (group:object) => ({type: "ADD_GROUP",value: group});
+export const setGroup = (groups:any[]) =>({type: "SET_GROUP",value: groups})
 export const dropGroup = (group:number) => ({type: "DROP_GROUP",value: group});
 export const clearGroups = () => ({type:"CLEAR_GROUPS"});
 
-export const addUser = (user:object) => ({type: "ADD_USER",value: JSON.stringify(user)});
+export const addUser = (user:object) => ({type: "ADD_USER",value: user});
 export const dropUser = (user:number) => ({type: "DROP_USER",value: user});
 export const clearUsers = () => ({type:"CLEAR_USERS"});
 
-export const addMessage = (message:object) => ({type: "ADD_MESSAGE",value:JSON.stringify(message)});
+export const addMessage = (message:object) => ({type: "ADD_MESSAGE",value:message});
 export const dropMessage = (message:number) => ({type: "DROP_MESSAGE",value: message});
 export const clearMessages = () => ({type:"CLEAR_MESSAGES"});
 
@@ -81,6 +82,21 @@ export function groupsReducer(state:string[] = [],action:action)
                     delete newState[action.value];
                 }
                 return newState; 
+            }
+        case "SET_GROUP":
+            {
+                let newState;
+                if(Array.isArray(action.value))
+                {
+                    newState = [...action.value];
+                }
+                else
+                {
+                    newState = [action.value]
+                }
+                console.log(newState);
+                return newState;
+                
             }
         
         case "CLEAR_GROUPS":

@@ -50,7 +50,7 @@ describe('Reducer of messages',()=>{
         const group={members: ["user1","user2","user3"]}
         const action = addGroup(group)
         store.dispatch(action);
-        const res = store.getState().group;
+        const res = store.getState().groups;
         expect(Array.isArray(res)).toBe(true);
         expect(res[0]).toBe(JSON.stringify(group));
     })
@@ -58,13 +58,13 @@ describe('Reducer of messages',()=>{
     it('Shoud drop message from messagess state array',()=>{
         const action = dropGroup(0);
         store.dispatch(action);
-        expect(store.getState().group).toContain(undefined);
+        expect(store.getState().groups).toContain(undefined);
     })
 
     it('Should clear messages state (state will be equal to [])',()=>{
         const action = clearGroups();
         store.dispatch(action);
-        expect(store.getState().group).toHaveLength(0);
+        expect(store.getState().groups).toHaveLength(0);
     })
 })
 

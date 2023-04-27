@@ -5,15 +5,7 @@ import axios from "axios";
 import { authURL } from "../config";
 import { useDispatch } from "react-redux";
 import { addToken } from "../store/reducers";
-
-const usernamePattern = /^(?!.*[{}\/;':"!@#$%^&*()_+]).{8,32}$/;
-const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&;:<>/\?]).{8,32}$/;
-
-interface loginFormInterface
-{
-    username:string;
-    password:string;
-}
+import { passwordPattern,usernamePattern,regexps,rules } from "../config";
 
 interface LoginContainerProps
 {
@@ -27,6 +19,7 @@ export default function LoginContainer(props:LoginContainerProps)
     const [passwordComment,setPasswordComment] = useState('');
     const {register, handleSubmit} = useForm();
     const dispatch = useDispatch();
+    const [areCredentialsOk,setAreCredentialsOk] = useState(true);
 
     async function onSubmit(data:any)
     {
@@ -44,6 +37,7 @@ export default function LoginContainer(props:LoginContainerProps)
         catch(err:any)
         {
             console.log(`Error ${err.data}`)
+            setAreCredentialsOk(false);
         }
     }
 
@@ -52,23 +46,6 @@ export default function LoginContainer(props:LoginContainerProps)
         const value = el.value;
         let complexity = 0;
         let comment:string = "";
-        const regexps:RegExp[] = [
-            /[a-z]/,
-            /[A-Z]/,
-            /[0-9]/,
-            /.{8}/,
-            /[!@#$%^&;:<>/\?]/,
-            /.{16}/,
-        ]
-
-        const rules:string[] = [
-            'co najmniej jedną małą literę \n',
-            'co najmniej jedną wielką literę \n',
-            'co najmniej jedną cyfrę \n',
-            'minimalną długość co najmniej 8 znaków (zalecane 16)\n',
-            'co najmniej jeden znak specjalny',
-            'mieć zalecaną długość 16 znaków'
-        ]
 
         regexps.forEach((regex,idx)=>{
             if(value.match(regex))
@@ -83,15 +60,16 @@ export default function LoginContainer(props:LoginContainerProps)
         complexity = Math.floor(complexity/regexps.length * 100);
         setPasswordStrength(complexity);
         setPasswordComment(comment);
-
     }
 
     return(<LoginForm 
+            areCredentialsOk={areCredentialsOk}
             passwordStrength={passwordStrength}
             onSubmit={handleSubmit(onSubmit)} 
             passwordComment={passwordComment}
             passwordHandler={passwordHandler}
             usernameConfig={register("username",{required:true,maxLength:32,minLength:8,pattern:usernamePattern})}
             passwordConfig={register("password",{required:true,maxLength:32,minLength:8,pattern:passwordPattern})}
+            switchToRegister={()=>props.switchToRegister()}
             />)
 }

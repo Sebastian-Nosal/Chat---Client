@@ -1,4 +1,3 @@
-import React from 'react';
 import NavBar from './presentations/Navbar';
 import { Provider } from 'react-redux';
 import store from './store/store';
@@ -6,12 +5,7 @@ import './styles/main.scss';
 import LoginContainer from './containers/loginContainer'
 import {useState} from 'react';
 import RegisterContainer from './containers/registerContainer';
-
-/*
-    mode 0 -> Login
-    mode 1 -> Register
-    mode 2 -> Chat
-*/
+import ChatContainer from './containers/chatContainer';
 
 function App() 
 {
@@ -28,7 +22,7 @@ function App()
         return (<RegisterContainer switchToLogin={()=>setMode(0)} switchToChat={()=>setMode(2)}/>)
         break;
       case 2:
-        return (<></>)
+        return (<ChatContainer switchToLogin={()=>setMode(0)} switchToRegister={()=>setMode(1)}/>)
         break;
     }
   }

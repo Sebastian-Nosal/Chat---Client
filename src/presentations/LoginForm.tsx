@@ -10,6 +10,8 @@ interface LoginFormProps
     passwordHandler: Function;
     usernameConfig:any;
     passwordConfig:any;
+    switchToRegister:Function;
+    areCredentialsOk?:boolean;
 }
 
 function LoginForm(props:LoginFormProps)
@@ -29,6 +31,7 @@ function LoginForm(props:LoginFormProps)
     <div className="form-container">
         <AccountCircleIcon/>
             <form onSubmit={props.onSubmit}>
+            {props.areCredentialsOk===false? (<span color="red">Niepoprawne dane</span>):(<></>)}
                 <label htmlFor="">
                     <span>Nazwa użytkownika</span>
                     <input type="text" id="username_input" {...props.usernameConfig}/>
@@ -53,7 +56,7 @@ function LoginForm(props:LoginFormProps)
                     }
                 </label>
                 <div className="button-container">
-                    <input type="button" value="Rejestracja" />
+                    <input type="button" value="Rejestracja" onClick={()=>props.switchToRegister()} />
                     <input type="submit" value="Zaloguj" />
                 </div>
             </form>
